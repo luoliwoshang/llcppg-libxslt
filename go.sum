@@ -1,0 +1,4 @@
+github.com/goplus/llgo v0.9.9 h1:sCM8ehOtuAEY/NQbJ4xAMRZhxEdDgilouWZpoaLiYrM=
+github.com/goplus/llgo v0.9.9/go.mod h1:udcq+s6tGOdhJq7I8fXPTv4qT2j17/KrlvtcJrMZAoM=
+github.com/luoliwoshang/llcppg-libxml v0.0.0-20250113105505-a8ff77df0fc2 h1:M0x61njMsZ4iw3ErMyXcPMFWtQtmkq0+zdZuX72Fve4=
+github.com/luoliwoshang/llcppg-libxml v0.0.0-20250113105505-a8ff77df0fc2/go.mod h1:VJiKFcJLv/UI8TTVT0JmO4fFPe/7JKdfHl9hY06OTsU=
