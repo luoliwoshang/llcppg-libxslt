@@ -8,10 +8,8 @@ import (
 
 type XsltCompMatch X_XsltCompMatch
 type XsltCompMatchPtr *XsltCompMatch
-// llgo:link (*XmlChar).XsltCompilePattern C.xsltCompilePattern
-func (recv_ *libxml_2_0.XmlChar) XsltCompilePattern(doc libxml_2_0.XmlDocPtr, node libxml_2_0.XmlNodePtr, style XsltStylesheetPtr, runtime XsltTransformContextPtr) XsltCompMatchPtr {
-	return nil
-}
+//go:linkname XsltCompilePattern C.xsltCompilePattern
+func XsltCompilePattern(pattern *libxml_2_0.XmlChar, doc libxml_2_0.XmlDocPtr, node libxml_2_0.XmlNodePtr, style XsltStylesheetPtr, runtime XsltTransformContextPtr) XsltCompMatchPtr
 //go:linkname XsltFreeCompMatchList C.xsltFreeCompMatchList
 func XsltFreeCompMatchList(comp XsltCompMatchPtr)
 //go:linkname XsltTestCompMatchList C.xsltTestCompMatchList

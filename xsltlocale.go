@@ -5,10 +5,8 @@ import (
 	"github.com/luoliwoshang/llcppg-libxml"
 	"unsafe"
 )
-// llgo:link (*XmlChar).XsltNewLocale C.xsltNewLocale
-func (recv_ *libxml_2_0.XmlChar) XsltNewLocale(lowerFirst c.Int) unsafe.Pointer {
-	return nil
-}
+//go:linkname XsltNewLocale C.xsltNewLocale
+func XsltNewLocale(langName *libxml_2_0.XmlChar, lowerFirst c.Int) unsafe.Pointer
 //go:linkname XsltFreeLocale C.xsltFreeLocale
 func XsltFreeLocale(locale unsafe.Pointer)
 //go:linkname XsltStrxfrm C.xsltStrxfrm

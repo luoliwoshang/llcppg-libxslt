@@ -366,16 +366,12 @@ const (
 )
 //go:linkname XsltNewStylesheet C.xsltNewStylesheet
 func XsltNewStylesheet() XsltStylesheetPtr
-// llgo:link (*XmlChar).XsltParseStylesheetFile C.xsltParseStylesheetFile
-func (recv_ *libxml_2_0.XmlChar) XsltParseStylesheetFile() XsltStylesheetPtr {
-	return nil
-}
+//go:linkname XsltParseStylesheetFile C.xsltParseStylesheetFile
+func XsltParseStylesheetFile(filename *libxml_2_0.XmlChar) XsltStylesheetPtr
 //go:linkname XsltFreeStylesheet C.xsltFreeStylesheet
 func XsltFreeStylesheet(style XsltStylesheetPtr)
-// llgo:link (*XmlChar).XsltIsBlank C.xsltIsBlank
-func (recv_ *libxml_2_0.XmlChar) XsltIsBlank() c.Int {
-	return 0
-}
+//go:linkname XsltIsBlank C.xsltIsBlank
+func XsltIsBlank(str *libxml_2_0.XmlChar) c.Int
 //go:linkname XsltFreeStackElemList C.xsltFreeStackElemList
 func XsltFreeStackElemList(elem XsltStackElemPtr)
 //go:linkname XsltDecimalFormatGetByName C.xsltDecimalFormatGetByName

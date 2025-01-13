@@ -21,18 +21,12 @@ type XsltStyleExtShutdownFunction func(XsltStylesheetPtr, *libxml_2_0.XmlChar, u
 type XsltExtInitFunction func(XsltTransformContextPtr, *libxml_2_0.XmlChar) unsafe.Pointer
 // llgo:type C
 type XsltExtShutdownFunction func(XsltTransformContextPtr, *libxml_2_0.XmlChar, unsafe.Pointer)
-// llgo:link (*XmlChar).XsltRegisterExtModule C.xsltRegisterExtModule
-func (recv_ *libxml_2_0.XmlChar) XsltRegisterExtModule(initFunc XsltExtInitFunction, shutdownFunc XsltExtShutdownFunction) c.Int {
-	return 0
-}
-// llgo:link (*XmlChar).XsltRegisterExtModuleFull C.xsltRegisterExtModuleFull
-func (recv_ *libxml_2_0.XmlChar) XsltRegisterExtModuleFull(initFunc XsltExtInitFunction, shutdownFunc XsltExtShutdownFunction, styleInitFunc XsltStyleExtInitFunction, styleShutdownFunc XsltStyleExtShutdownFunction) c.Int {
-	return 0
-}
-// llgo:link (*XmlChar).XsltUnregisterExtModule C.xsltUnregisterExtModule
-func (recv_ *libxml_2_0.XmlChar) XsltUnregisterExtModule() c.Int {
-	return 0
-}
+//go:linkname XsltRegisterExtModule C.xsltRegisterExtModule
+func XsltRegisterExtModule(URI *libxml_2_0.XmlChar, initFunc XsltExtInitFunction, shutdownFunc XsltExtShutdownFunction) c.Int
+//go:linkname XsltRegisterExtModuleFull C.xsltRegisterExtModuleFull
+func XsltRegisterExtModuleFull(URI *libxml_2_0.XmlChar, initFunc XsltExtInitFunction, shutdownFunc XsltExtShutdownFunction, styleInitFunc XsltStyleExtInitFunction, styleShutdownFunc XsltStyleExtShutdownFunction) c.Int
+//go:linkname XsltUnregisterExtModule C.xsltUnregisterExtModule
+func XsltUnregisterExtModule(URI *libxml_2_0.XmlChar) c.Int
 //go:linkname XsltGetExtData C.xsltGetExtData
 func XsltGetExtData(ctxt XsltTransformContextPtr, URI *libxml_2_0.XmlChar) unsafe.Pointer
 //go:linkname XsltStyleGetExtData C.xsltStyleGetExtData
@@ -43,56 +37,36 @@ func XsltShutdownCtxtExts(ctxt XsltTransformContextPtr)
 func XsltShutdownExts(style XsltStylesheetPtr)
 //go:linkname XsltXPathGetTransformContext C.xsltXPathGetTransformContext
 func XsltXPathGetTransformContext(ctxt libxml_2_0.XmlXPathParserContextPtr) XsltTransformContextPtr
-// llgo:link (*XmlChar).XsltRegisterExtModuleFunction C.xsltRegisterExtModuleFunction
-func (recv_ *libxml_2_0.XmlChar) XsltRegisterExtModuleFunction(URI *libxml_2_0.XmlChar, function libxml_2_0.XmlXPathFunction) c.Int {
-	return 0
-}
-// llgo:link (*XmlChar).XsltExtModuleFunctionLookup C.xsltExtModuleFunctionLookup
-func (recv_ *libxml_2_0.XmlChar) XsltExtModuleFunctionLookup(URI *libxml_2_0.XmlChar) libxml_2_0.XmlXPathFunction {
-	return nil
-}
-// llgo:link (*XmlChar).XsltUnregisterExtModuleFunction C.xsltUnregisterExtModuleFunction
-func (recv_ *libxml_2_0.XmlChar) XsltUnregisterExtModuleFunction(URI *libxml_2_0.XmlChar) c.Int {
-	return 0
-}
+//go:linkname XsltRegisterExtModuleFunction C.xsltRegisterExtModuleFunction
+func XsltRegisterExtModuleFunction(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar, function libxml_2_0.XmlXPathFunction) c.Int
+//go:linkname XsltExtModuleFunctionLookup C.xsltExtModuleFunctionLookup
+func XsltExtModuleFunctionLookup(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) libxml_2_0.XmlXPathFunction
+//go:linkname XsltUnregisterExtModuleFunction C.xsltUnregisterExtModuleFunction
+func XsltUnregisterExtModuleFunction(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) c.Int
 // llgo:type C
 type XsltPreComputeFunction func(XsltStylesheetPtr, libxml_2_0.XmlNodePtr, XsltTransformFunction) XsltElemPreCompPtr
 //go:linkname XsltNewElemPreComp C.xsltNewElemPreComp
 func XsltNewElemPreComp(style XsltStylesheetPtr, inst libxml_2_0.XmlNodePtr, function XsltTransformFunction) XsltElemPreCompPtr
 //go:linkname XsltInitElemPreComp C.xsltInitElemPreComp
 func XsltInitElemPreComp(comp XsltElemPreCompPtr, style XsltStylesheetPtr, inst libxml_2_0.XmlNodePtr, function XsltTransformFunction, freeFunc XsltElemPreCompDeallocator)
-// llgo:link (*XmlChar).XsltRegisterExtModuleElement C.xsltRegisterExtModuleElement
-func (recv_ *libxml_2_0.XmlChar) XsltRegisterExtModuleElement(URI *libxml_2_0.XmlChar, precomp XsltPreComputeFunction, transform XsltTransformFunction) c.Int {
-	return 0
-}
+//go:linkname XsltRegisterExtModuleElement C.xsltRegisterExtModuleElement
+func XsltRegisterExtModuleElement(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar, precomp XsltPreComputeFunction, transform XsltTransformFunction) c.Int
 //go:linkname XsltExtElementLookup C.xsltExtElementLookup
 func XsltExtElementLookup(ctxt XsltTransformContextPtr, name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) XsltTransformFunction
-// llgo:link (*XmlChar).XsltExtModuleElementLookup C.xsltExtModuleElementLookup
-func (recv_ *libxml_2_0.XmlChar) XsltExtModuleElementLookup(URI *libxml_2_0.XmlChar) XsltTransformFunction {
-	return nil
-}
-// llgo:link (*XmlChar).XsltExtModuleElementPreComputeLookup C.xsltExtModuleElementPreComputeLookup
-func (recv_ *libxml_2_0.XmlChar) XsltExtModuleElementPreComputeLookup(URI *libxml_2_0.XmlChar) XsltPreComputeFunction {
-	return nil
-}
-// llgo:link (*XmlChar).XsltUnregisterExtModuleElement C.xsltUnregisterExtModuleElement
-func (recv_ *libxml_2_0.XmlChar) XsltUnregisterExtModuleElement(URI *libxml_2_0.XmlChar) c.Int {
-	return 0
-}
+//go:linkname XsltExtModuleElementLookup C.xsltExtModuleElementLookup
+func XsltExtModuleElementLookup(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) XsltTransformFunction
+//go:linkname XsltExtModuleElementPreComputeLookup C.xsltExtModuleElementPreComputeLookup
+func XsltExtModuleElementPreComputeLookup(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) XsltPreComputeFunction
+//go:linkname XsltUnregisterExtModuleElement C.xsltUnregisterExtModuleElement
+func XsltUnregisterExtModuleElement(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) c.Int
 // llgo:type C
 type XsltTopLevelFunction func(XsltStylesheetPtr, libxml_2_0.XmlNodePtr)
-// llgo:link (*XmlChar).XsltRegisterExtModuleTopLevel C.xsltRegisterExtModuleTopLevel
-func (recv_ *libxml_2_0.XmlChar) XsltRegisterExtModuleTopLevel(URI *libxml_2_0.XmlChar, function XsltTopLevelFunction) c.Int {
-	return 0
-}
-// llgo:link (*XmlChar).XsltExtModuleTopLevelLookup C.xsltExtModuleTopLevelLookup
-func (recv_ *libxml_2_0.XmlChar) XsltExtModuleTopLevelLookup(URI *libxml_2_0.XmlChar) XsltTopLevelFunction {
-	return nil
-}
-// llgo:link (*XmlChar).XsltUnregisterExtModuleTopLevel C.xsltUnregisterExtModuleTopLevel
-func (recv_ *libxml_2_0.XmlChar) XsltUnregisterExtModuleTopLevel(URI *libxml_2_0.XmlChar) c.Int {
-	return 0
-}
+//go:linkname XsltRegisterExtModuleTopLevel C.xsltRegisterExtModuleTopLevel
+func XsltRegisterExtModuleTopLevel(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar, function XsltTopLevelFunction) c.Int
+//go:linkname XsltExtModuleTopLevelLookup C.xsltExtModuleTopLevelLookup
+func XsltExtModuleTopLevelLookup(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) XsltTopLevelFunction
+//go:linkname XsltUnregisterExtModuleTopLevel C.xsltUnregisterExtModuleTopLevel
+func XsltUnregisterExtModuleTopLevel(name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar) c.Int
 //go:linkname XsltRegisterExtFunction C.xsltRegisterExtFunction
 func XsltRegisterExtFunction(ctxt XsltTransformContextPtr, name *libxml_2_0.XmlChar, URI *libxml_2_0.XmlChar, function libxml_2_0.XmlXPathFunction) c.Int
 //go:linkname XsltRegisterExtElement C.xsltRegisterExtElement
